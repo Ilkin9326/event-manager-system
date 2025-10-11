@@ -1,0 +1,54 @@
+<div class="row">
+  <div class="col">
+    <div class="avatar avatar-lg">
+      <i class="text-white ti ti-calculator-filled"></i>
+    </div>
+  </div>
+  <div class="col-6">
+    <span class="text-white f-20 f-w-500"> Ümumi analitika</span>
+  </div>
+  <div class="col-auto">
+    <div class="d-flex align-items-center gap-2 chart-income">
+      <div title="Ay ərzində olan tədbir sayı"
+        class="btn btn-sm text-white f-15"
+        [ngClass]="this.btnActive === 'month' ? 'btn-primary' : ''"
+        (click)="toggleActive('month')"
+        tabindex="0"
+        (keydown)="handleKeyDown($event, 'month')"
+      >
+        Ay
+      </div>
+      <div
+        title="İlə görə olan tədbir sayı"
+        class="btn btn-sm text-white"
+        [ngClass]="this.btnActive === 'year' ? 'btn-primary' : ''"
+        (click)="toggleActive('year')"
+        tabindex="0"
+        (keydown)="handleKeyDown($event, 'year')"
+      >
+        İl
+      </div>
+    </div>
+  </div>
+</div>
+<div class="row">
+  <div class="col-6">
+    <span class="text-white d-block f-34 f-w-500 my-2">
+      ${{ amount }}
+      <i class="ti ti-circle-arrow-up-right opacity-50"></i>
+    </span>
+  </div>
+  <div class="col-6">
+    <div id="chart text-dark">
+      <apx-chart
+        [series]="chartOptions.series"
+        [chart]="chartOptions.chart"
+        [dataLabels]="chartOptions.dataLabels"
+        [yaxis]="chartOptions.yaxis"
+        [colors]="chartOptions.colors"
+        [stroke]="chartOptions.stroke"
+        [tooltip]="chartOptions.tooltip"
+      ></apx-chart>
+    </div>
+  </div>
+</div>

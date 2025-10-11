@@ -1,0 +1,44 @@
+<!-- User Modal -->
+<div class="modal" role="dialog" tabindex="-1" [ngStyle]="{'display':displayStyle}">
+  <div class="modal-dialog">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h1 class="modal-title fs-5" id="exampleModalLabel">{{textName}}</h1>
+        <button type="button" class="btn-close" (click)="closePopup()" aria-label="Close"></button>
+      </div>
+      <div class="modal-body">
+        <form [formGroup]="userGroup">
+          <div class="mb-3">
+            <label for="name" class="col-form-label">Adı:</label>
+            <input type="text" class="form-control" id="name" formControlName="name">
+            @if (!userGroup.get('name').valid && userGroup.get('name').touched) {
+              <small id="subject" class="text-danger font-weight-bold">Başlıq seçilməyib(min: 5 simvol)
+              </small>
+            }
+          </div>
+          <div class="mb-3">
+            <label for="surname" class="col-form-label">Soyadı:</label>
+            <input type="text" class="form-control" id="surname" formControlName="surname">
+          </div>
+          <div class="mb-3">
+            <label for="email" class="col-form-label">Email:</label>
+            <input type="email" class="form-control" id="email" formControlName="email">
+            @if (!userGroup.get('email').valid && userGroup.get('email').touched) {
+              <small id="email-subject" class="text-danger font-weight-bold">email düzgün yazılmayıb
+              </small>
+            }
+          </div>
+        </form>
+      </div>
+      <div class="modal-footer">
+        <button type="button" class="btn btn-danger" (click)="closePopup()" id="closeModal">Bağla</button>
+        @if (btnVisiblityUpdate){
+          <button type="button" class="btn btn-primary" [disabled]="!userGroup.valid" (click)="updateEventCategory()"> Dəyiş</button>
+        } @else {
+          <button type="button" class="btn btn-primary" (click)="postEmployee()" [disabled]="!userGroup.valid">Əlavə et</button>
+        }
+
+      </div>
+    </div>
+  </div>
+</div>

@@ -1,0 +1,36 @@
+<!-- Modal -->
+<div class="modal" role="dialog" tabindex="-1" [ngStyle]="{'display':displayStyle}">
+  <div class="modal-dialog">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h1 class="modal-title fs-5" id="exampleModalLabel">{{textName}}</h1>
+        <button type="button" class="btn-close" (click)="closePopup()" aria-label="Close"></button>
+      </div>
+      <div class="modal-body">
+        <form [formGroup]="roleGroup">
+          <div class="mb-3">
+            <label for="title" class="col-form-label">Adı:</label>
+            <input type="text" class="form-control" id="title" formControlName="title">
+            @if (!roleGroup.get('title').valid && roleGroup.get('title').touched) {
+              <small id="subject" class="text-danger font-weight-bold">Adı qeyd edilməyib(min: 5 simvol)
+              </small>
+            }
+          </div>
+          <div class="mb-3">
+            <label for="description" class="col-form-label">Təsvir:</label>
+            <input type="text" class="form-control" id="description" formControlName="description">
+          </div>
+        </form>
+      </div>
+      <div class="modal-footer">
+        <button type="button" class="btn btn-danger" (click)="closePopup()" id="closeModal">Bağla</button>
+        @if (btnVisiblityUpdate){
+          <button type="button" class="btn btn-primary" [disabled]="!roleGroup.valid" (click)="updateRole()"> Dəyiş</button>
+        } @else {
+          <button type="button" class="btn btn-primary" (click)="postNewRole()" [disabled]="!roleGroup.valid">Əlavə et</button>
+        }
+
+      </div>
+    </div>
+  </div>
+</div>
