@@ -8,11 +8,12 @@ import { BerryConfig } from 'src/app/app-config';
 import { NavLeftComponent } from './nav-left/nav-left.component';
 import { NavLogoComponent } from './nav-logo/nav-logo.component';
 import { NavRightComponent } from './nav-right/nav-right.component';
+import { RouterModule } from '@angular/router';
 
 @Component({
   selector: 'app-nav-bar',
   standalone: true,
-  imports: [NavLogoComponent, NavLeftComponent, NavRightComponent, CommonModule],
+  imports: [NavLogoComponent, NavLeftComponent, NavRightComponent, CommonModule, RouterModule],
   templateUrl: './nav-bar.component.html',
   styleUrls: ['./nav-bar.component.scss']
 })
@@ -23,7 +24,8 @@ export class NavBarComponent {
   navCollapsed: boolean;
   windowWidth: number;
   navCollapsedMob: boolean;
-  headerColor = "#1d458a";
+  headerColor = '#1d458a';
+
   // Constructor
   constructor() {
     this.windowWidth = window.innerWidth;

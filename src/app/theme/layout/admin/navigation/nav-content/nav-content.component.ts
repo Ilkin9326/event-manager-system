@@ -1,5 +1,5 @@
 // Angular import
-import { Component, OnInit, output, inject } from '@angular/core';
+import { Component, inject, OnInit, output } from '@angular/core';
 import { CommonModule, Location } from '@angular/common';
 import { RouterModule } from '@angular/router';
 
@@ -61,7 +61,7 @@ export class NavContentComponent implements OnInit {
       // @ts-ignore
       current_url = this.location['_baseHref'] + this.location.path();
     }
-    const link = "a.nav-link[ href='" + current_url + "' ]";
+    const link = 'a.nav-link[ href=\'' + current_url + '\' ]';
     const ele = document.querySelector(link);
     if (ele !== null && ele !== undefined) {
       const parent = ele.parentElement;

@@ -1,10 +1,12 @@
 import { CommonModule } from '@angular/common';
 import { Component, OnInit, Renderer2 } from '@angular/core';
 import { BerryConfig } from 'src/app/app-config';
+import { NgbTooltip } from '@ng-bootstrap/ng-bootstrap';
+import { RouterModule } from '@angular/router';
 
 @Component({
   selector: 'app-configuration',
-  imports: [CommonModule],
+  imports: [CommonModule, NgbTooltip, RouterModule],
   templateUrl: './configuration.component.html',
   standalone: true,
   styleUrls: ['./configuration.component.scss']

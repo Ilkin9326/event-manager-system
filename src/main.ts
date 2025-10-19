@@ -5,13 +5,14 @@ import { provideHttpClient, withInterceptors } from '@angular/common/http';
 import { provideToastr } from 'ngx-toastr';
 
 import { AppComponent } from '@app/app.component';
-import { AppRoutingModule } from '@app/app-routing.module';
 import { AdminLayoutModule } from '@app/theme/layout/admin-layout/admin-layout.module';
 import { environment } from './environments/environment';
 
 // 🔒 Interceptor-lar
 import { jwtInterceptor } from '@app/jwt.interceptor';
 import { errorHandlingInterceptor } from '@app/error-handling.interceptor';
+import { provideRouter } from '@angular/router';
+import { routes } from '@app/app.routes';
 
 if (environment.production) {
   enableProdMode();
@@ -19,11 +20,11 @@ if (environment.production) {
 
 bootstrapApplication(AppComponent, {
   providers: [
-    importProvidersFrom(BrowserModule, AppRoutingModule, AdminLayoutModule),
+    importProvidersFrom(BrowserModule, AdminLayoutModule),
     provideZoneChangeDetection({ eventCoalescing: true }),
     provideAnimations(),
     provideToastr(),
-
+    provideRouter(routes),
     provideHttpClient(
       withInterceptors([
         jwtInterceptor,

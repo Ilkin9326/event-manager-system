@@ -7,11 +7,12 @@ import { NavigationItem } from '../../navigation';
 
 import { NavCollapseComponent } from '../nav-collapse/nav-collapse.component';
 import { NavItemComponent } from '../nav-item/nav-item.component';
+import { RouterModule } from '@angular/router';
 
 @Component({
   selector: 'app-nav-group',
   standalone: true,
-  imports: [CommonModule, NavCollapseComponent, NavItemComponent],
+  imports: [CommonModule, NavCollapseComponent, NavItemComponent, RouterModule],
   templateUrl: './nav-group.component.html',
   styleUrl: './nav-group.component.scss'
 })

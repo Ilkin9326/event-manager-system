@@ -1,14 +1,15 @@
 import { HttpInterceptorFn, HttpStatusCode } from '@angular/common/http';
 import { AuthService } from './services/auth/auth.service';
 import { inject } from '@angular/core';
-import { catchError, of } from 'rxjs';
+import { catchError, of, throwError } from 'rxjs';
 import { ToastrService } from 'ngx-toastr';
 
 export const errorHandlingInterceptor: HttpInterceptorFn = (req, next) => {
   const authService:AuthService = inject(AuthService);
   const toastr:ToastrService = inject(ToastrService);
 
-  return next(req).pipe(catchError(error =>{
+  return next(req).pipe(
+    catchError(error =>{
     //console.log('interceptor gelen error', error.status)
     switch(error.status){
       case HttpStatusCode.Unauthorized:
@@ -36,6 +37,6 @@ export const errorHandlingInterceptor: HttpInterceptorFn = (req, next) => {
         break;
 
     }
-    return of(error);
+    return throwError(() => error);
   }));
 };

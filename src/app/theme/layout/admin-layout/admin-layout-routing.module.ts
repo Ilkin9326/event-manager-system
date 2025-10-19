@@ -6,50 +6,26 @@ import ElementColorComponent from '../../../demo/elements/element-color/element-
 import { EventCategoryComponent } from '@app/pages/event-category/event-category.component';
 import { RolesComponent } from '@app/pages/roles/roles.component';
 import { UsersComponent } from '@app/pages/users/users.component';
+import { AdminComponent } from '@app/theme/layout/admin/admin.component';
 
 const routes: Routes = [
   {
     path: '',
+    component: AdminComponent, // Router outlet AdminComponent-də
     children: [
-      {
-        path: '',
-        redirectTo: 'home',
-        pathMatch: 'full'
-      },
-      {
-        path: 'home',
-        component:DefaultComponent
-
-      },
-      {
-        path: 'ev-cat',
-        component: TypographyComponent
-      },
-      {
-        path: 'color',
-        component:ElementColorComponent
-      },
-      {
-        path: 'users',
-        component:UsersComponent
-      },
-      {
-        path: 'category',
-        component:EventCategoryComponent
-
-      },
-      {
-        path: 'roles',
-        component:RolesComponent
-      }
-    ]
+      { path: '', redirectTo: 'home', pathMatch: 'full' },
+      { path: 'home', component: DefaultComponent },
+      { path: 'ev-cat', component: TypographyComponent },
+      { path: 'color', component: ElementColorComponent },
+      { path: 'users', component: UsersComponent },
+      { path: 'category', component: EventCategoryComponent },
+      { path: 'roles', component: RolesComponent },
+    ],
   },
 ];
 
 @NgModule({
   imports: [RouterModule.forChild(routes)],
-  exports: [RouterModule]
+  exports: [RouterModule],
 })
-export class AdminLayoutRoutingModule {
-
-}
+export class AdminLayoutRoutingModule {}
