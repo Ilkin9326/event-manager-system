@@ -20,17 +20,9 @@ export class AuthService {
   route: Router = inject(Router);
 
   constructor(private http: HttpClient) {
-    console.log('token: ', this.getToken());
-    this.userActivated.subscribe({
-      next: (res: boolean) => {
-        console.log('res auth servise: ', res);
-      }
-    });
-
-    if (this.getToken() != '') {
+    if (this.getToken() != '' && this.getToken() !== null) {
       this.userActivated.next(true);
     }
-
   }
 
   postLogin(email: string, password: string) {
@@ -45,9 +37,9 @@ export class AuthService {
           if (res.token != null && res.user != null) {
 
             localStorage.setItem('user', JSON.stringify(res.user));
+            this.storeToken(res.token);
             this.isLoggedIn = true;
             this.userActivated.next(true);
-            this.storeToken(res.token);
 
             this.toaster.success('Ugurlu Giris edildi');
             this.route.navigate(['/home'], { replaceUrl: true });

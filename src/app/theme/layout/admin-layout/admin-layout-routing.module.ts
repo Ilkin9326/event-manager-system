@@ -7,11 +7,13 @@ import { EventCategoryComponent } from '@app/pages/event-category/event-category
 import { RolesComponent } from '@app/pages/roles/roles.component';
 import { UsersComponent } from '@app/pages/users/users.component';
 import { AdminComponent } from '@app/theme/layout/admin/admin.component';
+import { authGuard } from '@app/auth.guard';
 
 const routes: Routes = [
   {
     path: '',
     component: AdminComponent, // Router outlet AdminComponent-də
+    canActivateChild: [authGuard],
     children: [
       { path: '', redirectTo: 'home', pathMatch: 'full' },
       { path: 'home', component: DefaultComponent },
