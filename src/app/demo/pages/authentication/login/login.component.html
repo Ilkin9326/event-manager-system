@@ -8,16 +8,16 @@
           </div>
 
 
-          <h5 class="my-4 d-flex justify-content-center">Sign in with Email address</h5>
+          <h5 class="my-4 d-flex justify-content-center fs-4">{{ loginTile }}</h5>
           <form [formGroup]="signInForm" (ngSubmit)="submitForm()">
             <div class="form-floating mb-3">
               <input type="email" class="form-control" id="floatingInput" value="info@codedthemes.com"
                      formControlName="email" />
-              <label for="floatingInput">Email address / Username</label>
+              <label for="floatingInput" class="fs-5">E-poçt ünvanı</label>
             </div>
             <div class="form-floating mb-3">
               <input type="password" class="form-control" id="password" value="12345" formControlName="password" />
-              <label for="password">Password</label>
+              <label for="password" class="fs-5">Şifrə</label>
             </div>
             <!-- <div class="d-flex mt-1 justify-content-between">
                <div class="form-check">
@@ -29,13 +29,13 @@
                </h5>
              </div>-->
             <div class="d-grid mt-4">
-              <button type="submit" class="btn btn-primary" [disabled]="!signInForm.valid">Sign
+              <button type="submit" class="btn btn-primary fs-4" [disabled]="!signInForm.valid">Sign
                 In
               </button>
             </div>
             <hr />
             <h5 class="d-flex justify-content-center">
-              <a [routerLink]="['/guest/register']">Don't have an account?</a>
+              <p class="text-primary-emphasis fs-4">&COPY;{{year}}</p>
             </h5>
           </form>
         </div>

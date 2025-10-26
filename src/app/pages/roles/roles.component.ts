@@ -4,6 +4,7 @@ import { RolesDto } from '@app/dto/roles-dto';
 import { RolesService } from '@app/services/roles/roles.service';
 import { HttpErrorResponse } from '@angular/common/http';
 import { RoleModalComponent } from './role-modal/role-modal.component';
+import { NotificationService } from '@app/services/notification.service';
 
 @Component({
   selector: 'app-roles',
@@ -16,10 +17,11 @@ import { RoleModalComponent } from './role-modal/role-modal.component';
   styleUrl: './roles.component.scss'
 })
 export class RolesComponent implements OnInit {
-  @ViewChild(RoleModalComponent) modalComponent:RoleModalComponent;
+  @ViewChild(RoleModalComponent) modalComponent: RoleModalComponent;
   roles: RolesDto[] = [];
   roleService: RolesService = inject(RolesService);
   title: string = 'Rollar';
+  notificationService: NotificationService = inject(NotificationService);
 
   ngOnInit(): void {
     this.getAllRoles();
@@ -30,18 +32,18 @@ export class RolesComponent implements OnInit {
 
 
   openPopup() {
-    this.modalComponent.displayStyle = "block";
-    this.modalComponent.textName = "Yeni Role";
+    this.modalComponent.displayStyle = 'block';
+    this.modalComponent.textName = 'Yeni Role';
     this.modalComponent.roleGroup.reset();
     this.modalComponent.btnVisiblityUpdate = false;
     this.modalComponent.btnVisiblityAdd = true;
   }
 
   updRole(item: RolesDto) {
-    this.modalComponent.displayStyle="block";
+    this.modalComponent.displayStyle = 'block';
     this.modalComponent.btnVisiblityUpdate = true;
     this.modalComponent.btnVisiblityAdd = false;
-    this.modalComponent.textName = "Role | Dəyişmək";
+    this.modalComponent.textName = 'Role | Dəyişmək';
     this.modalComponent.onEdit(item);
   }
 
@@ -55,7 +57,8 @@ export class RolesComponent implements OnInit {
         this.roles! = res['response-data'];
       },
       error: (err: HttpErrorResponse) => {
-        console.error(err.message);
+        const errorMsg = err.error?.message || err.statusText || 'Xəta baş verdi';
+        this.notificationService.showError(errorMsg);
       }
     });
   }

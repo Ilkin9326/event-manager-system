@@ -13,14 +13,14 @@ export const errorHandlingInterceptor: HttpInterceptorFn = (req, next) => {
     //console.log('interceptor gelen error', error.status)
     switch(error.status){
       case HttpStatusCode.Unauthorized:
-        toastr.error(error.name,error.statusText);
+        toastr.error(error.error.detail, error.error.title);
         authService.logout();
         break;
       case HttpStatusCode.InternalServerError:
         toastr.error(error.name,error.statusText);
         break;
       case HttpStatusCode.BadRequest:
-        toastr.error(error.name,error.statusText);
+        toastr.error(error.error.detail, error.error.title);
         break;
       case HttpStatusCode.MethodNotAllowed:
         toastr.error(error.name,error.statusText);
@@ -30,8 +30,9 @@ export const errorHandlingInterceptor: HttpInterceptorFn = (req, next) => {
         authService.logout();
         break;
       default:
-        toastr.error( error.message,'Unexpected error occured');
-        //this.route.navigate(['login']);
+        console.log(error)
+        toastr.error( error.error.detail,error.error.title);
+        authService.logout();
         break;
 
     }

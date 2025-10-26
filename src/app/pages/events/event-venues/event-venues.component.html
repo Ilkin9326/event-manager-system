@@ -1,0 +1,83 @@
+<app-card cardTitle="{{title}}">
+  <div class="container mt-4">
+
+    <!-- Add button -->
+    <div class="d-flex justify-content-end mb-1">
+      <button class="btn btn-primary mb-3" (click)="openAdd()">
+        <i class="ti ti-plus"></i> Yeni Otaq Əlavə Et
+      </button>
+    </div>
+
+    <!-- Table -->
+    <div class="table-responsive">
+      <table class="table table-hover table-bordered">
+        <thead class="table-success">
+        <tr>
+          <th>#</th>
+          <th>Otaq Adı</th>
+          <th>Bina</th>
+          <th>Tutum</th>
+          <th class="text-center" id="operation">Əməliyyatlar</th>
+        </tr>
+        </thead>
+        <tbody>
+          @for (room of rooms; track room.id) {
+            <tr>
+              <td>{{ room.id + 1 }}</td>
+              <td>{{ room.name }}</td>
+              <td>{{ room.building }}</td>
+              <td>{{ room.capacity }} nəfər</td>
+              <td>
+                <div class="d-flex gap-2 text-center">
+
+                <button class="btn btn-warning btn-sm mx-2" (click)="openEdit(room)">
+                    <i class="ti ti-pencil-up"></i>
+                  </button>
+                  <button class="btn btn-danger btn-sm" (click)="deleteRoom(room.id)">
+                    <i class="ti ti-trash"></i>
+                  </button>
+                </div>
+              </td>
+            </tr>
+          } @empty {
+            <tr>
+              <td colspan="5" class="text-center text-muted">Otaq siyahısı boşdur.</td>
+            </tr>
+          }
+        </tbody>
+      </table>
+    </div>
+  </div>
+
+  <!-- Modal (Add/Edit) -->
+  <div class="modal fade" id="roomModal" tabindex="-1" aria-hidden="true">
+    <div class="modal-dialog">
+      <div class="modal-content">
+        <form (ngSubmit)="saveRoom()">
+          <div class="modal-header">
+            <h5 class="modal-title">{{ editMode ? 'Otağı Dəyiş' : 'Yeni Otaq Əlavə Et' }}</h5>
+            <button type="button" class="btn-close" data-bs-dismiss="modal"></button>
+          </div>
+          <div class="modal-body">
+            <div class="mb-3">
+              <label>Otaq Adı</label>
+              <input type="text" class="form-control" [(ngModel)]="currentRoom.name" name="name" required>
+            </div>
+            <div class="mb-3">
+              <label>Bina</label>
+              <input type="text" class="form-control" [(ngModel)]="currentRoom.building" name="building" required>
+            </div>
+            <div class="mb-3">
+              <label>Tutum</label>
+              <input type="number" class="form-control" [(ngModel)]="currentRoom.capacity" name="capacity" required>
+            </div>
+          </div>
+          <div class="modal-footer">
+            <button type="submit" class="btn btn-success">{{ editMode ? 'Yadda Saxla' : 'Əlavə Et' }}</button>
+            <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Bağla</button>
+          </div>
+        </form>
+      </div>
+    </div>
+  </div>
+</app-card>

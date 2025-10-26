@@ -1,12 +1,12 @@
 import { Routes } from '@angular/router';
-import { GuestComponent } from '@app/theme/layout/guest/guest.component';
+import { AuthComponent } from '@app/theme/layout/guest/auth.component';
 import { authGuard } from '@app/auth.guard';
 
 export const routes: Routes = [
   // Guest (auth) routes
   {
     path: 'auth',
-    component: GuestComponent,
+    component: AuthComponent,
     children: [
       {
         path: '',
@@ -21,7 +21,6 @@ export const routes: Routes = [
   // Admin routes
   {
     path: '',
-    canActivate: [authGuard],
     loadChildren: () =>
       import('./theme/layout/admin-layout/admin-layout.module').then(
         (m) => m.AdminLayoutModule

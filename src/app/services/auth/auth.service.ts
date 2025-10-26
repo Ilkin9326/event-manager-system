@@ -3,7 +3,7 @@ import { HttpClient, HttpErrorResponse, HttpHeaders } from '@angular/common/http
 import { environment } from '../../../environments/environment';
 import { Router } from '@angular/router';
 import { ToastrService } from 'ngx-toastr';
-import { BehaviorSubject, firstValueFrom, Observable } from 'rxjs';
+import { BehaviorSubject, catchError, Observable, of, tap, throwError } from 'rxjs';
 
 const httpOptions = {
   headers: new HttpHeaders({ 'Content-Type': 'application/json', 'Accept': 'application/json' })
@@ -13,67 +13,97 @@ const httpOptions = {
   providedIn: 'root'
 })
 export class AuthService {
-  userActivated: BehaviorSubject<boolean> = new BehaviorSubject(false);
-  isLoggedIn: boolean = false;
-  private api_url: string = environment.apiUrl;
-  toaster: ToastrService = inject(ToastrService);
-  route: Router = inject(Router);
+  userActivated = new BehaviorSubject<boolean>(false);
+  private api_url = environment.apiUrl;
+  private http = inject(HttpClient);
+  private router = inject(Router);
+  private toaster = inject(ToastrService);
 
-  constructor(private http: HttpClient) {
-    if (this.getToken() != '' && this.getToken() !== null) {
+  constructor() {
+    if (this.getToken()) {
       this.userActivated.next(true);
+    }
+
+  }
+
+  postLogin(email: string, password: string): void {
+    const data = { email, password };
+    this.http.post(this.api_url+'/api/v1/auth/authenticate', data).subscribe({
+      next: (res: any) => {
+        if (res.token && res.user) {
+          localStorage.setItem('user', JSON.stringify(res.user));
+          this.storeToken(res.token);
+          this.userActivated.next(true);
+          this.toaster.success('Uğurlu giriş edildi');
+
+          this.router.navigate(['/home'], { replaceUrl: true });
+        }
+      },
+      error: (err: HttpErrorResponse) => {
+        if (err.status === 0) {
+          this.toaster.error('Serverə qoşulmaq mümkün olmadı');
+        } else if (err.status >= 500) {
+          this.toaster.error('Server xətası baş verdi');
+        }
+        return throwError(() => err);
+
+      }
+    });
+  }
+
+  logout(): void {
+    this.removeToken();
+    this.userActivated.next(false);
+    this.router.navigate(['/auth/login'], { replaceUrl: true });
+  }
+
+  //server seviyyesinde yoxlama
+  checkLogin(): Observable<boolean> {
+    const headers = new HttpHeaders({
+      Authorization: `Bearer ${this.getToken()}`
+    });
+    return this.http.get<boolean>(`${this.api_url}/api/v1/auth/check-login`, { headers }).pipe(
+      tap((isValid) => {
+        this.userActivated.next(isValid);
+
+      }),
+        catchError(() => {
+          this.userActivated.next(false);
+          return of(false);
+        })
+      );
+  }
+
+
+  //lokal seviyyede yoxlayaq, guarda hissede yoxlanilir, performans baximindan lazimdi
+  isTokenExpired(token: string): boolean {
+    if (!token) return true;
+
+    try {
+      const payload = JSON.parse(atob(token.split('.')[1]));
+      const expiry = payload.exp;
+      let res = Date.now() >= expiry * 1000;
+      if(res)this.userActivated.next(false);
+      return res;
+    } catch (e) {
+      this.userActivated.next(false);
+      return true; // Token parse olunmursa, expired say
     }
   }
 
-  postLogin(email: string, password: string) {
-    const data: { password: string; email: string } =
-      {
-        email: email,
-        password: password
-      };
-    this.http.post(this.api_url + '/api/v1/auth/authenticate', data, httpOptions)
-      .subscribe({
-        next: (res: any) => {
-          if (res.token != null && res.user != null) {
 
-            localStorage.setItem('user', JSON.stringify(res.user));
-            this.storeToken(res.token);
-            this.isLoggedIn = true;
-            this.userActivated.next(true);
 
-            this.toaster.success('Ugurlu Giris edildi');
-            this.route.navigate(['/home'], { replaceUrl: true });
-          }
-        },
-        error: (err: HttpErrorResponse) => {
-          if (err.error.detail != null) this.toaster.error(err.error.detail, err.error.title);
-          else this.toaster.error(err.message);
-        }
-      });
-  }
-
-  logout() {
-    this.removeTokenFromLocalStorage();
-    this.userActivated.next(false);
-    this.isLoggedIn = false;
-    this.route.navigate(['/auth/login'], { replaceUrl: true });
+  getToken(): string {
+    return localStorage.getItem('token') || '';
   }
 
   private storeToken(token: string): void {
     localStorage.setItem('token', token);
   }
 
-  getToken(): string {
-    return localStorage.getItem('token');
-  }
-
-  private removeTokenFromLocalStorage() {
+  private removeToken(): void {
     localStorage.removeItem('token');
-    localStorage.clear();
-  }
-
-  private hasToken(): boolean {
-    return !!localStorage.getItem('token');
+    localStorage.removeItem('user');
   }
 
 

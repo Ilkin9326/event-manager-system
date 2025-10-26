@@ -18,6 +18,8 @@ export default class LoginComponent implements OnInit, OnDestroy {
   userEmail:string;
   userPsw:string;
   authservice:AuthService = inject(AuthService);
+  year:number = new Date().getFullYear();
+  loginTile:string = "E-poçt ünvanı ilə giriş";
   constructor(private route: Router, private fb: FormBuilder) {
   }
 

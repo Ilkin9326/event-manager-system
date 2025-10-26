@@ -1,10 +1,10 @@
 import { Component, inject, OnInit, ViewChild } from '@angular/core';
-import { CardComponent } from '../../theme/shared/components/card/card.component';
-import { EventService } from '../../services/event/event.service';
+import { CardComponent } from '../../../theme/shared/components/card/card.component';
+import { EventService } from '../../../services/event/event.service';
 import { HttpErrorResponse } from '@angular/common/http';
 import { Title } from '@angular/platform-browser';
-import { ModalComponent } from '../../theme/shared/components/modal/modal.component';
-import { EventCategory } from '../../dto/event-category';
+import { ModalComponent } from '../../../theme/shared/components/modal/modal.component';
+import { EventCategory } from '../../../dto/event-category';
 
 
 @Component({

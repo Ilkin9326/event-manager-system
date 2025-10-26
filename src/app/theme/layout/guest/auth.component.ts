@@ -5,8 +5,8 @@ import { RouterModule } from '@angular/router';
 @Component({
   selector: 'app-guest',
   imports: [RouterModule],
-  templateUrl: './guest.component.html',
+  templateUrl: './auth.component.html',
   standalone: true,
-  styleUrls: ['./guest.component.scss']
+  styleUrls: ['./auth.component.scss']
 })
-export class GuestComponent {}
+export class AuthComponent {}
