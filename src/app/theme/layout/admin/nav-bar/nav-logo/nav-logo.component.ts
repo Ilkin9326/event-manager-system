@@ -21,6 +21,9 @@ export class NavLogoComponent {
     if (this.windowWidth >= 1025) {
       this.navCollapsed = !this.navCollapsed;
       this.NavCollapse.emit();
+    }else{
+      this.navCollapsed = true;
+      this.NavCollapse.emit();
     }
   }
 }

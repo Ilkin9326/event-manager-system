@@ -1,0 +1,54 @@
+.custom-modal {
+  border-radius: 20px;
+  background: #ffffff;
+}
+
+.custom-input {
+  border: 1.5px solid #edf2f7;
+  border-radius: 12px;
+  background-color: #f8fafc;
+  padding: 10px 15px;
+  transition: 0.2s;
+}
+
+.custom-input:focus {
+  border-color: #4299e1;
+  background-color: #fff;
+  box-shadow: 0 0 0 4px rgba(66, 153, 225, 0.15);
+}
+
+.custom-input.highlight {
+  border-left: 4px solid #4299e1;
+}
+
+/* Seçim Kartları (Rektor, Poster, Online) */
+.status-card {
+  border: 1.5px solid #edf2f7;
+  border-radius: 12px;
+  color: #718096;
+  background: #f8fafc;
+  transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+}
+
+.status-card.active {
+  background: #ebf8ff;
+  border-color: #4299e1;
+  color: #2b6cb0;
+  transform: translateY(-2px);
+}
+
+.cursor-pointer {
+  cursor: pointer;
+  user-select: none;
+}
+
+.btn-primary {
+  background: #3182ce;
+  border: none;
+  font-weight: 600;
+  letter-spacing: 0.5px;
+}
+
+.btn-primary:hover:not(:disabled) {
+  background: #2b6cb0;
+}

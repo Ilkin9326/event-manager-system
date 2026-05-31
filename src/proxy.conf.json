@@ -1,17 +1,40 @@
 {
   "/event-cat/**": {
-        "target": "http://localhost:9090/api/v1",
-        "secure": false,
-        "changeOrigin": true,
-        "logLevel": "debug"
+    "target": "http://localhost:9090/api/v1",
+    "secure": false,
+    "changeOrigin": true,
+    "logLevel": "debug"
   },
+
   "/role/**": {
     "target": "http://localhost:9090/api/v1",
     "secure": false,
     "changeOrigin": true,
     "logLevel": "debug"
   },
+
   "/user/**": {
+    "target": "http://localhost:9090/api/v1",
+    "secure": false,
+    "changeOrigin": true,
+    "logLevel": "debug"
+  },
+
+  "/venues/**": {
+    "target": "http://localhost:9090/api/v1",
+    "secure": false,
+    "changeOrigin": true,
+    "logLevel": "debug"
+  },
+
+  "/it-support/**": {
+    "target": "http://localhost:9090/api/v1",
+    "secure": false,
+    "changeOrigin": true,
+    "logLevel": "debug"
+  },
+
+  "/events/**": {
     "target": "http://localhost:9090/api/v1",
     "secure": false,
     "changeOrigin": true,

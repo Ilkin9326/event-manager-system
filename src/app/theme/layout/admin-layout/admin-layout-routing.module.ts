@@ -9,6 +9,7 @@ import { UsersComponent } from '@app/pages/users/users.component';
 import { AdminComponent } from '@app/theme/layout/admin/admin.component';
 import { authGuard } from '@app/auth.guard';
 import { EventVenuesComponent } from '@app/pages/events/event-venues/event-venues.component';
+import { EventsComponent } from '@app/pages/events/events/events.component';
 
 const routes: Routes = [
   {
@@ -23,7 +24,8 @@ const routes: Routes = [
       { path: 'users', component: UsersComponent },
       { path: 'category', component: EventCategoryComponent },
       { path: 'roles', component: RolesComponent },
-      { path: 'venues', component: EventVenuesComponent },
+      { path: 'venue', component: EventVenuesComponent },
+      { path: 'my-events', component: EventsComponent },
     ],
   },
 ];

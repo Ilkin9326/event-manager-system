@@ -6,6 +6,7 @@ import { catchError, throwError } from 'rxjs';
 export const jwtInterceptor: HttpInterceptorFn = (req, next) => {
   const authServise:AuthService = inject(AuthService);
   const token = authServise.getToken();
+
   if (token) {
     req = req.clone({
       setHeaders: {

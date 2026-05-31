@@ -1,10 +1,8 @@
 import { Component, inject, Input, OnInit } from '@angular/core';
 import { FormBuilder, FormGroup, ReactiveFormsModule, Validators } from '@angular/forms';
-import { EventService } from '../../../services/event/event.service';
 import { NgStyle } from '@angular/common';
-import { RolesService } from '../../../services/roles/roles.service';
-import { RolesDto } from '../../../dto/roles-dto';
-import { EventCategory } from '../../../dto/event-category';
+import { RolesService } from '@app/services/roles/roles.service';
+import { RolesDto } from '@app/dto/roles-dto';
 
 @Component({
   selector: 'app-role-modal',

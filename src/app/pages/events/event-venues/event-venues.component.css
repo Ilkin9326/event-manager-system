@@ -2,3 +2,8 @@
   width: 140px;
   white-space: nowrap;
 }
+.table-responsive {
+  position: relative;
+  z-index: auto;
+  overflow: visible;
+}

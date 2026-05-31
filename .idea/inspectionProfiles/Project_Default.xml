@@ -1,0 +1,51 @@
+<component name="InspectionProjectProfileManager">
+  <profile version="1.0">
+    <option name="myName" value="Project Default" />
+    <inspection_tool class="HtmlUnknownAttribute" enabled="true" level="WARNING" enabled_by_default="true">
+      <option name="myValues">
+        <value>
+          <list size="19">
+            <item index="0" class="java.lang.String" itemvalue="crossorigin" />
+            <item index="1" class="java.lang.String" itemvalue="integrity" />
+            <item index="2" class="java.lang.String" itemvalue="src" />
+            <item index="3" class="java.lang.String" itemvalue="+{{venue.v_id}}" />
+            <item index="4" class="java.lang.String" itemvalue="track" />
+            <item index="5" class="java.lang.String" itemvalue="ngxScrollbar" />
+            <item index="6" class="java.lang.String" itemvalue="(click)" />
+            <item index="7" class="java.lang.String" itemvalue="formControlName" />
+            <item index="8" class="java.lang.String" itemvalue="[ngValue]" />
+            <item index="9" class="java.lang.String" itemvalue="(ngSubmit)" />
+            <item index="10" class="java.lang.String" itemvalue="[formGroup]" />
+            <item index="11" class="java.lang.String" itemvalue="[value]" />
+            <item index="12" class="java.lang.String" itemvalue="[checked]" />
+            <item index="13" class="java.lang.String" itemvalue="(change)" />
+            <item index="14" class="java.lang.String" itemvalue="[disabled]" />
+            <item index="15" class="java.lang.String" itemvalue="#eventForm" />
+            <item index="16" class="java.lang.String" itemvalue="[(ngModel)]" />
+            <item index="17" class="java.lang.String" itemvalue="[for]" />
+            <item index="18" class="java.lang.String" itemvalue="[id]" />
+          </list>
+        </value>
+      </option>
+      <option name="myCustomValuesEnabled" value="true" />
+    </inspection_tool>
+    <inspection_tool class="HtmlUnknownTag" enabled="true" level="WARNING" enabled_by_default="true">
+      <option name="myValues">
+        <value>
+          <list size="9">
+            <item index="0" class="java.lang.String" itemvalue="nobr" />
+            <item index="1" class="java.lang.String" itemvalue="noembed" />
+            <item index="2" class="java.lang.String" itemvalue="comment" />
+            <item index="3" class="java.lang.String" itemvalue="noscript" />
+            <item index="4" class="java.lang.String" itemvalue="embed" />
+            <item index="5" class="java.lang.String" itemvalue="script" />
+            <item index="6" class="java.lang.String" itemvalue="router-outlet" />
+            <item index="7" class="java.lang.String" itemvalue="app-spinner" />
+            <item index="8" class="java.lang.String" itemvalue="full-calendar" />
+          </list>
+        </value>
+      </option>
+      <option name="myCustomValuesEnabled" value="true" />
+    </inspection_tool>
+  </profile>
+</component>

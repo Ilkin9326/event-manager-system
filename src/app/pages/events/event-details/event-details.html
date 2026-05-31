@@ -1,0 +1,64 @@
+<div class="modal-content">
+  <button class="close-btn" (click)="activeModal.dismiss()">
+    <svg width="22" height="22" viewBox="0 0 24 24">
+      <path d="M6 6l12 12M18 6l-12 12"
+            stroke="#64748b"
+            stroke-width="2"
+            stroke-linecap="round"/>
+    </svg>
+  </button>
+  <!-- Title -->
+  <h2>{{selectedEvent.titleAz}}</h2>
+  <div class="event-badge fs-6">Tədbir</div><!--burda tedbir tipi cixacaq(iclas, teqdimat ve s)-->
+
+
+  <!-- Start -->
+  <div class="event-row mt-3">
+    <div class="event-icon">
+      <!-- Start icon burada -->
+      <svg width="20" height="20" viewBox="0 0 24 24" fill="none">
+        <path d="M9 12l2 2 4-4" stroke="#22c55e" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+        <rect x="3" y="4" width="18" height="18" rx="3" stroke="#22c55e" stroke-width="2"/>
+      </svg>
+    </div>
+    <div>
+      <div class="label">Start</div>
+      <div class="value">{{selectedEvent.start}}</div>
+    </div>
+  </div>
+
+  <!-- End -->
+  <div class="event-row">
+    <div class="event-icon">
+      <!-- End icon -->
+      <svg width="20" height="20" viewBox="0 0 24 24" fill="none">
+        <line x1="9" y1="9" x2="15" y2="15" stroke="#fb923c" stroke-width="2" stroke-linecap="round"/>
+        <line x1="15" y1="9" x2="9" y2="15" stroke="#fb923c" stroke-width="2" stroke-linecap="round"/>
+        <rect x="3" y="4" width="18" height="18" rx="3" stroke="#fb923c" stroke-width="2"/>
+      </svg>
+    </div>
+    <div>
+      <div class="label">End</div>
+      <div class="value">2025-12-13</div>
+    </div>
+  </div>
+
+  <!-- Description -->
+  <div class="event-row">
+    <div class="event-icon">
+      <svg width="20" height="20" viewBox="0 0 24 24" fill="none">
+        <path d="M5 5h14M5 12h14M5 19h10" stroke="#60a5fa" stroke-width="2" stroke-linecap="round"/>
+      </svg>
+    </div>
+
+    <div>
+      <div class="label">Description</div>
+      <div class="value">
+        {{selectedEvent.descAz}}
+      </div>
+    </div>
+  </div>
+
+
+  <button class="delete-btn" (click)="deleteEvent()">Tədbiri sil</button>
+</div>

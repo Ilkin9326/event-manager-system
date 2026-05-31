@@ -32,3 +32,90 @@
 @import url('scss/fonts/berry/berry-icons.css'); /** custom font icons - berry **/
 @import 'scss/fonts/tabler-icons.min.css';
 @import 'scss/fonts/phosphor/duotone/style.css';
+
+.fc-daygrid-day,
+.fc-daygrid-day-frame,
+.fc-daygrid-day-top,
+.fc-daygrid-day-events,
+.fc-daygrid-day-bg,
+.fc-daygrid-day-number {
+  cursor: pointer !important;
+  pointer-events: auto !important;
+}
+.fc-daygrid-day-frame {
+  padding: 6px !important;
+  border-radius: 6px;
+}
+
+.fc-daygrid-day:hover .fc-daygrid-day-frame {
+  box-shadow: 0 0 0 3px rgba(0,123,255,0.15);
+}
+
+.fc-daygrid-day-frame {
+  padding: 6px !important;
+  border-radius: 6px;
+}
+
+.fc-daygrid-day:hover .fc-daygrid-day-frame {
+  box-shadow: 0 0 0 3px rgba(0,123,255,0.15);
+}
+
+.fc-today-button {
+  background: #007bff !important;
+  border: none !important;
+  border-radius: 6px !important;
+  color: white !important;
+  padding: 6px 14px !important;
+}
+
+.fc-today-button {
+  background: #007bff !important;
+  border: none !important;
+  border-radius: 6px !important;
+  color: white !important;
+  padding: 6px 14px !important;
+}
+
+.fc-daygrid-day.fc-day-today .fc-daygrid-day-number {
+  background: #66a1dc;
+  color: white !important;
+  padding: 4px 8px;
+  border-radius: 5px;
+  font-weight: bold;
+}
+.fc-day-today {
+  position: relative;
+}
+
+.fc-day-today::after {
+  content: "";
+  position: absolute;
+  inset: 0;
+  border-radius: 8px;
+  border: 2px solid rgba(255, 193, 7, 0.6);
+  animation: pulse 1.6s infinite;
+}
+
+@keyframes pulse {
+  0% { transform: scale(1); opacity: 1; }
+  100% { transform: scale(1.15); opacity: 0; }
+}
+
+
+/* hefte adlari ve gunlerin dizayni*/
+.fc-col-header-cell {
+  background: #eaf3ff;
+  color: #004899;
+  font-weight: 700;
+  font-size: 13px;
+  padding: 8px;
+  border-bottom: 2px solid #c2d9ff;
+}
+
+.fc-daygrid-day-number {
+  font-size: 14px;
+  font-weight: bold;
+  color: #003a7a;
+}
+
+

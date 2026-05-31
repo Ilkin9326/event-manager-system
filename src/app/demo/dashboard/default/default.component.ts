@@ -85,6 +85,6 @@ export class DefaultComponent implements OnInit, OnDestroy {
   ];
 
   ngOnDestroy() {
-    console.log("HomeComponent bağlandı");
+
   }
 }

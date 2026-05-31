@@ -1,8 +1,9 @@
 import { inject, Injectable } from '@angular/core';
 import { HttpClient, HttpErrorResponse, HttpParams } from '@angular/common/http';
-import { Observable, Subject, tap } from 'rxjs';
+import { map, Observable, Subject, tap } from 'rxjs';
 import { ToastrService } from 'ngx-toastr';
-import { EventCategory } from '../../dto/event-category';
+import { EventCategory } from '@app/dto/event-category';
+import { EventDto } from '@app/dto/EventDto';
 
 @Injectable({
   providedIn: 'root'
@@ -96,5 +97,45 @@ export class EventService {
           this.toaster.error(err.error.detail, err.error.title);
         }
       });
+  }
+
+  saveDraft(payload: EventDto): Observable<any> {
+    return this.http.post('events', { ...payload, status: 1 }).pipe(
+      tap(() => {
+        this.toaster.info('Draft saxlandı');
+      })
+    );
+  }
+
+  saveNewEvent(payload: EventDto): Observable<any> {
+    return this.http.post('events', { ...payload, status: 2 }).pipe(
+      tap(() => {
+        this.toaster.success('Tədbir uğurla yaradıldı');
+      })
+    );
+  }
+
+  getCalendarEvents(): Observable<any[]> {
+    return this.http.get<any>('events').pipe(
+      map((res: any) => res.data.map((e: any) => ({
+        id:    String(e.eventId),
+        title: e.titleAz,
+        start: e.startTime,
+        end:   e.endTime,
+        color: e.status === 1 ? '#ffc107' : '#20c997',
+        extendedProps: {
+          titleEn:           e.titleEn,
+          titleRu:           e.titleRu,
+          venueName:         e.venueName,
+          expectedAttendees: e.expectedAttendees,
+          descAz:            e.descAz,
+          descEn:            e.descEn,
+          isOnline:          e.isOnline,
+          hasPoster:         e.hasPoster,
+          rectorAttendance:  e.rectorAttendance,
+          status:            e.status
+        }
+      })))
+    );
   }
 }

@@ -1,0 +1,64 @@
+<form [formGroup]="roomForm" (ngSubmit)="saveRoom()">
+  <div class="modal-header">
+    <h5 class="modal-title">{{ editMode ? 'Otağı Dəyiş' : 'Yeni Otaq Əlavə Et' }}</h5>
+    <button type="button" class="btn-close" (click)="activeModal.dismiss('Dismiss click')"></button>
+  </div>
+  <div class="modal-body">
+
+    <div class="mb-3">
+      <label class="form-label">Otaq Adı</label>
+      <input type="text" class="form-control" formControlName="name" required>
+      <div class="form-text text-success fw-bold" id="basic-addon4">Otaq adı boş buraxıla bilməz</div>
+    </div>
+
+    <div class="mb-3">
+      <label class="form-label">Bina (BC ID)</label>
+      <label>
+        <select class="form-select" formControlName="bc_id" required>
+          @for (bina of buildingOptions; track bina.id) {
+            <option [ngValue]="bina.id">{{ bina.title }}</option>
+          }
+        </select>
+      </label>
+    </div>
+
+    <div class="mb-3">
+      <label class="form-label">Tutum</label>
+      <input type="number" min="1" class="form-control" formControlName="capacity" required>
+    </div>
+
+    <div class="mb-3">
+      <label class="form-label">Yerləşdiyi yer</label>
+      <input type="text" class="form-control" formControlName="floor" required>
+    </div>
+
+    <div class="mb-3">
+      <label class="form-label d-block">Özəlliklər</label>
+      <div class="d-flex flex-wrap gap-3">
+        @for (feature of allFeatures; track feature) {
+          <div class="form-check form-check-inline">
+            <input
+              class="form-check-input"
+              type="checkbox"
+              [value]="feature"
+              [checked]="isFeatureSelected(feature)"
+              (change)="onFeatureChange($event)">
+            <label class="form-check-label">{{ feature }}</label>
+          </div>
+        }
+      </div>
+    </div>
+
+    <div class="mb-3">
+      <label class="form-label">Qeyd</label>
+      <textarea class="form-control" formControlName="notes"></textarea>
+    </div>
+
+  </div>
+  <div class="modal-footer">
+    <button type="button" class="btn btn-secondary" (click)="activeModal.dismiss('Close click')">Bağla</button>
+    <button type="submit" class="btn btn-success" [disabled]="roomForm.invalid">
+      {{ editMode ? 'Yadda Saxla' : 'Əlavə Et' }}
+    </button>
+  </div>
+</form>

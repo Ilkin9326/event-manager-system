@@ -13,6 +13,7 @@ export const errorHandlingInterceptor: HttpInterceptorFn = (req, next) => {
     //console.log('interceptor gelen error', error.status)
     switch(error.status){
       case HttpStatusCode.Unauthorized:
+        alert('bura gelirmi');
         toastr.error(error.error.detail, error.error.title);
         authService.logout();
         break;

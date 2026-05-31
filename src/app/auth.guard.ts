@@ -11,23 +11,24 @@ export const authGuard: CanActivateFn = (route, state) => {
   const isExpired = authService.isTokenExpired(token);
 
   if (isExpired) {
+    console.log('Token expired → logout');
     authService.logout();
     return of(false);
   }
 
-  // Token lokal olaraq keçərlidir → serverlə sinxronlaş
   return authService.checkLogin().pipe(
     map((isValid) => {
+      console.log('checkLogin isValid:', isValid);
       if (!isValid) {
         authService.logout();
         return false;
       }
       return true;
     }),
-    catchError(() => {
+    catchError((err) => {
+      console.log('checkLogin error:', err);
       authService.logout();
       return of(false);
     })
   );
-
 };

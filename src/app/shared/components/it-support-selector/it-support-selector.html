@@ -1,0 +1,48 @@
+<div class="card border rounded-3 mb-3">
+  <div class="card-header bg-light d-flex align-items-center gap-2 py-2">
+    <span class="d-flex align-items-center justify-content-center rounded-2 bg-white border"
+          style="width:28px;height:28px;">
+      <i class="ti ti-device-laptop text-success" style="font-size:13px;"></i>
+    </span>
+    <span class="fw-semibold small">IT Təchizatı</span>
+  </div>
+  <div class="card-body p-3">
+    @if (loading()) {
+      <p class="text-muted small mb-0">Yüklənir...</p>
+    } @else {
+      @for (category of categories(); track category) {
+        <div class="mb-3">
+          <div class="d-flex align-items-center gap-2 mb-2">
+            <span class="text-uppercase text-muted fw-semibold"
+                  style="font-size:10px;letter-spacing:0.5px;">{{ category }}</span>
+            <hr class="flex-grow-1 m-0 opacity-25">
+          </div>
+          @for (item of items()[category]; track item.isi_id) {
+            <div class="d-flex align-items-center justify-content-between mb-1">
+              <div class="form-check mb-0">
+                <input class="form-check-input"
+                       type="checkbox"
+                       [id]="'item_' + item.isi_id"
+                       [checked]="isChecked(item.isi_id)"
+                       (change)="onCheck(item, $any($event.target).checked)">
+                <label class="form-check-label" [for]="'item_' + item.isi_id"
+                       style="font-size:12px;">
+                  {{ item.item_name }}
+                </label>
+              </div>
+              @if (item.isCountRequired && isChecked(item.isi_id)) {
+                <input type="number"
+                       class="form-control form-control-sm text-center"
+                       style="width:52px;"
+                       placeholder="say"
+                       min="1" max="50"
+                       (input)="onQuantity(item, $any($event.target).value)"
+                       (change)="clampValue($event)">
+              }
+            </div>
+          }
+        </div>
+      }
+    }
+  </div>
+</div>

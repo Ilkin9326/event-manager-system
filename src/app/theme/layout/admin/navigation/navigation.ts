@@ -17,12 +17,7 @@ export interface NavigationItem {
 
 export const NavigationItems: NavigationItem[] = [
   {
-    /*id: 'dashboard',
-    title: 'Ana səhifə',
-    type: 'group',
-    icon: 'icon-navigation',
-    children: [
-      {*/
+
     id: 'default',
     title: 'Ana səhifə',
     type: 'item',
@@ -54,7 +49,7 @@ export const NavigationItems: NavigationItem[] = [
     title: 'Tədbirlər',
     type: 'item',
     classes: 'nav-item',
-    url: '/events',
+    url: '/my-events',
     icon: 'ti ti-calendar',
     breadcrumbs: false
   },
@@ -81,7 +76,7 @@ export const NavigationItems: NavigationItem[] = [
     title: 'Tədbir Məkanları',
     type: 'item',
     classes: 'nav-item',
-    url: '/venues',
+    url: '/venue',
     icon: 'ti ti-map-pin',
     breadcrumbs: false
   }
